@@ -21,7 +21,11 @@ export class App extends Component {
     });
   };
   handleSubmit = (name, number) => {
-    if (this.state.contacts.find((el) => el.name === name)) {
+    if (
+      this.state.contacts.find(
+        (el) => el.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
       alert(`${name} is alredy in contacts`);
     }
 
