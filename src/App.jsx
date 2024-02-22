@@ -12,7 +12,7 @@ export class App extends Component {
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
-
+    newData: [],
     filter: "",
   };
   handleDelete = (nameEl) => {
@@ -50,6 +50,15 @@ export class App extends Component {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
     }
+    if (this.state.filter !== prevState.filter) {
+      console.log(this.state.newDate);
+      const newData = this.state.contacts.filter((el) =>
+        el.name.toLowerCase().includes(this.state.filter.toLowerCase())
+      );
+      this.setState({
+        newData,
+      });
+    }
   }
   componentDidMount() {
     const contacts = localStorage.getItem("contacts");
@@ -57,6 +66,7 @@ export class App extends Component {
     if (parsedContacts) {
       this.setState({
         contacts: parsedContacts,
+        newData: parsedContacts,
       });
     }
   }
@@ -90,8 +100,7 @@ export class App extends Component {
             />
             <ul>
               <ContactRender
-                contacts={this.state.contacts}
-                search={this.state.filter}
+                contacts={this.state.newData}
                 onClick={this.handleDelete}
               />
             </ul>
