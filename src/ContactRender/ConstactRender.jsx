@@ -1,6 +1,5 @@
 import { Component } from "react";
 import css from "./ContactRender.module.css";
-import PropTypes from "prop-types";
 
 export class ContactRender extends Component {
   handleDelet = (e) => {
