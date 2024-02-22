@@ -17,7 +17,9 @@ export class App extends Component {
   };
   handleDelete = (nameEl) => {
     this.setState((prev) => {
-      return { contacts: prev.contacts.filter(({ id }) => id !== nameEl) };
+      return {
+        contacts: prev.contacts.filter(({ id }) => id !== nameEl),
+      };
     });
   };
   handleSubmit = (name, number) => {
@@ -49,6 +51,9 @@ export class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+      this.setState({
+        newData: this.state.contacts,
+      });
     }
     if (this.state.filter !== prevState.filter) {
       console.log(this.state.newDate);
@@ -61,6 +66,9 @@ export class App extends Component {
     }
   }
   componentDidMount() {
+    this.setState({
+      newData: this.state.contacts,
+    });
     const contacts = localStorage.getItem("contacts");
     const parsedContacts = JSON.parse(contacts);
     if (parsedContacts) {
